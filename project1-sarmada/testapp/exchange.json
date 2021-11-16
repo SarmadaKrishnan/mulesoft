@@ -1,0 +1,11 @@
+{
+  "main" : "testapp.raml",
+  "name" : "testapp",
+  "classifier" : "raml",
+  "tags" : [ ],
+  "groupId" : "67989dab-9431-4c7e-bff3-79b738a86978",
+  "assetId" : "testapp",
+  "version" : "1.0.0",
+  "apiVersion" : "",
+  "dependencies" : [ ]
+}

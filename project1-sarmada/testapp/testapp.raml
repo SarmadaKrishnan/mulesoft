@@ -1,0 +1,69 @@
+#%RAML 1.0
+title: testapp
+baseUri: http://apilayer.net/api
+securitySchemes:
+  basic:
+     type: Basic Authentication
+     displayName: Basic Authentication
+     description: API only works with basic authentication
+protocols: [HTTP]
+description: this is a number verification application
+documentation: 
+    - title: NUM Verify API
+      content: Refer below doc for more info https://numverify.com/documentation
+types:   
+  apiresponse:
+    properties:
+      valid: boolean
+      number: string
+      local_format: string
+      international_format: string
+      country_prefix: string
+
+/validate:
+  get:
+    queryParameters:
+      access_key: string
+      number: string
+      country_code: string
+      format: string
+    description: for validating the phone
+    displayName: validate phone
+    protocols: [HTTP]
+    responses:
+      403:
+        body:
+          application/json:
+            example:
+              {
+                  "message": "Resource does not exsist" 
+              } 
+      400:
+        body:
+          application/json:
+            example: 
+              {
+                  "message": "API key is invalid"
+              }
+      200:
+        body:
+          application/json:
+            type: apiresponse
+            example:
+              {
+                "valid": true,
+                 "number": "14158586273",
+                 "local_format": "4158586273",
+                 "international_format": "+14158586273",
+                 "country_prefix":+1",
+                 "country_name":"USA",
+                 "location": "Novato",
+                 "carrier": "AT&T Mobility LLC",
+                 "line_type": "mobile"
+              }
+
+              
+
+
+
+
