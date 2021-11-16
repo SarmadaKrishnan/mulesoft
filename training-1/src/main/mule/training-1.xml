@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c06d9120-4ab0-4eb3-8b78-34a0119dd5cc" >
+		<http:listener-connection host="0.0.0.0" port="${http.port}" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="be4ba586-5d89-4ce5-a00f-8094072e0c96" />
+	<configuration-properties doc:name="Configuration properties" doc:id="0f4d526f-707f-40b4-b0d6-bf6396bd6549" file="config.properties" />
+	<flow name="training-1Flow" doc:id="cffe33ba-0c48-4300-a035-527878c43756" >
+		<http:listener doc:name="Listener" doc:id="4d064c27-33cd-4891-bd7e-4379ab133775" config-ref="HTTP_Listener_config" path="/test"/>
+		<set-variable value="attributes.queryParams.name" doc:name="name" doc:id="dc625c45-c363-4477-a614-205e4174c5f1" variableName="name"/>
+		<set-variable value="attributes.methods" doc:name="methodname" doc:id="937106dd-9ea9-4bb2-93f4-8552b54a4e58" variableName="methodname"/>
+		<ee:transform doc:name="Transform Message" doc:id="c27d7292-79a5-40d1-ba8b-d8a06a8b56a3" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[p('message')]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<set-payload value='#["last step"]' doc:name="flow Set Payload " doc:id="0be10113-316f-4116-a06b-ac1d330d242f" />
+		<logger level="INFO" doc:name="Logger" doc:id="527bb39b-d525-48da-bc63-69f7ca1d6089" message='"full process is over"'/>
+	</flow>
+	<flow name="training-1Flow1" doc:id="f43eca7d-e4e9-45fb-8a4b-2cac944fa5b6" >
+		<set-payload value="privateflow" doc:name="private flow Set Payload" doc:id="b00155f5-d703-485f-93d3-80ec625a0c56" />
+	</flow>
+	<flow name="training-1Flow2" doc:id="28c55d70-4e9e-47f1-a602-e3dc68d7f83a" >
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="7fdb7028-b573-4b8d-b8d1-ab657c1797f1" />
+	</flow>
+	<sub-flow name="training-1Sub_Flow" doc:id="c5f59d7e-086e-4c1f-aa1f-71d7633b3870" >
+		<set-payload value='#["subflow"]' doc:name="subflow Set Payload" doc:id="a5e94598-f38f-4d47-83f8-df87111b468f" />
+	</sub-flow>
+</mule>

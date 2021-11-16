@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e0351138-81f1-4d9f-9a9a-28d02c83cf9e" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="american-flightFlow" doc:id="0746d184-03f2-4daf-8822-ef86ac53d5d2" >
+		<http:listener doc:name="Listener" doc:id="68dab1ac-fdd5-4ef5-bfa8-32646340c571" config-ref="HTTP_Listener_config" path="/flights"/>
+		<set-payload value='#["hello"]' doc:name="Set Payload" doc:id="955b7384-99cb-4c88-b9f4-17b2a94243c2" />
+	</flow>
+</mule>

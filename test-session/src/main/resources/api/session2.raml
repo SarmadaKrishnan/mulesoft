@@ -1,0 +1,62 @@
+#%RAML 1.0
+
+title: session2
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/85d1733a-aa89-4069-8c63-9fb2abe653a7 # 
+/search:
+  get:
+    queryParameters:
+      keyword:
+        type: string
+        minLength: 3
+        maxLength: 10
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "message":"result returned successfully"
+              }
+/dosearch:
+  post:
+    queryParameters:
+      keyword:
+        type: string
+        minLength: 3
+        maxLength: 10 
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "message":"result returned successfully"
+              }
+/news:
+  post:
+    queryParameters:
+      country:
+        required: false
+      body: 
+      application/json:
+         properties:
+           username:
+             required: true
+             minLength: 5
+             maxLength: 10
+           password:
+             required: true
+             minLength: 6
+             maxLength: 10
+    responses:
+      200:
+       body:
+        application/json:
+          examples:
+            local:
+              "Indian News": "Breaking News"
+              "Local time": "12:30:10"
+            main:
+              "Duration": "2:30:00"
+          
+
